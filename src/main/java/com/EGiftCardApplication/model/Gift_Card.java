@@ -1,0 +1,80 @@
+package com.EGiftCardApplication.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "gift_card")
+public class Gift_Card {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int giftCardId;
+
+	private String giftCardName;
+	private String brandList;
+
+	private String redemptiondetails;
+	private float minAmount = 100;
+	private float maxamount = 10000;
+	private String aboutGiftCard;
+
+	public String getGiftCardName() {
+		return giftCardName;
+	}
+
+	public void setGiftCardName(String giftCardName) {
+		this.giftCardName = giftCardName;
+	}
+
+	public String getBrandList() {
+		return brandList;
+	}
+
+	public void setBrandList(String brandList) {
+		this.brandList = brandList;
+	}
+
+	public String getRedemptiondetails() {
+		return redemptiondetails;
+	}
+
+	public void setRedemptiondetails(String redemptiondetails) {
+		this.redemptiondetails = redemptiondetails;
+	}
+
+	public float getMinAmount() {
+		return minAmount;
+	}
+
+	public void setMinAmount(float minAmount) {
+		this.minAmount = minAmount;
+	}
+
+	public float getMaxamount() {
+		return maxamount;
+	}
+
+	public void setMaxamount(float maxamount) {
+		this.maxamount = maxamount;
+	}
+
+	public String getAboutGiftCard() {
+		return aboutGiftCard;
+	}
+
+	public void setAboutGiftCard(String aboutGiftCard) {
+		this.aboutGiftCard = aboutGiftCard;
+	}
+
+	@Override
+	public String toString() {
+		return "Gift_Card [giftCardId=" + giftCardId + ", giftCardName=" + giftCardName + ", brandList=" + brandList
+				+ ", redemptiondetails=" + redemptiondetails + ", minAmount=" + minAmount + ", maxamount=" + maxamount
+				+ ", aboutGiftCard=" + aboutGiftCard + "]";
+	}
+
+}
