@@ -15,4 +15,6 @@ public interface NotificationService {
 
 	Gift_recd_details sendGift_recd_detailsNotification(Gift_recd_details gift_recd_details);
 
+	String sendDemoNotif();
+
 }
