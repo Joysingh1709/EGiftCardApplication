@@ -6,6 +6,7 @@ import com.EGiftCardApplication.model.User;
 public interface UserManagementService {
 	
 	List<User> getAllUsers();
+	List<User> getUserByfirstLast(String firstName, String lastName);
 	User getUserById(int userId);
 	User RegisterUser(User user);
 	User UpdateUser(User user);
