@@ -73,7 +73,6 @@ public class UserManagementServiceImpl implements UserManagementService {
 		return null;
 	}
 
-	@Override
 	public String deleteUser(User user) throws UserCustomExceptions {
 		userRepo.delete(user);
 		if (userRepo.findById(user.getUserId()).isPresent()) {

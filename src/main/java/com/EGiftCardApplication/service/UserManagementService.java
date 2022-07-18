@@ -12,7 +12,8 @@ public interface UserManagementService {
 
 	User getUserByEmailPass(String email, String password) throws UserCustomExceptions, InvalidInputException;
 
-	User updateUserPassword(String email, String oldPassword, String newPassword) throws UserCustomExceptions, InvalidInputException;
+	User updateUserPassword(String email, String oldPassword, String newPassword)
+			throws UserCustomExceptions, InvalidInputException;
 
 	List<User> searchUsers(String searchText);
 
