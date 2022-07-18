@@ -8,14 +8,20 @@ import org.springframework.data.repository.query.Param;
 
 import com.EGiftCardApplication.model.User;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-	@Query("select u from User u where (:firstName is null or u.firstName = :firstName)" + ""
-			+ " and(:lastName is null or u.lastName = :lastName)")
-	List<User> getUserByfirstLast(@Param("firstName") String firstName, @Param("lastName") String lastName);
+	@Query("From User u WHERE u.email =:uEmail AND u.password =:uPass")
+	User getUserByEmailAndPassword(@Param("uEmail") String email, @Param("uPass") String password);
 
-	@Query("select u from User where (:email is null or u.email = :email)")
-	 
+	@Query("From User u WHERE u.password =:oldPass AND u.email =:uEmail")
+	User getUserWithOldPass(@Param("uEmail") String email, @Param("oldPass") String oldPassword);
 
-	User getUserByEmail(@Param ("email")String email);
+	@Query("SELECT u FROM User u WHERE u.firstName LIKE %:firstName%")
+	List<User> searchUsersByFirstName(@Param("firstName") String firstName);
+
+	@Query("SELECT u FROM User u WHERE u.lastName LIKE %:lastName%")
+	List<User> searchUsersByLastName(@Param("lastName") String lastName);
+
+	@Query("SELECT u FROM User u WHERE u.email LIKE %:email%")
+	List<User> searchUsersByEmail(@Param("email") String email);
 }

@@ -15,10 +15,10 @@ public class User_Gift_details {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userGiftId;
+	private Long userGiftId;
 
-	private int userId;
-	private int giftCardId;
+	private Long userId;
+	private Long giftCardId;
 	private float giftCardAmount;
 	private Date giftCardIssueDate;
 	private boolean reloadable;
@@ -27,7 +27,7 @@ public class User_Gift_details {
 	private String RecipientsEmail;
 	private String delivaryType;
 	private LocalDate scheduledelivary;
-	private int personalizeId;
+	private Long personalizeId;
 
 	@Override
 	public String toString() {
@@ -38,19 +38,27 @@ public class User_Gift_details {
 				+ ", scheduledelivary=" + scheduledelivary + ", personalizeId=" + personalizeId + "]";
 	}
 
-	public int getUserId() {
+	public Long getUserGiftId() {
+		return userGiftId;
+	}
+
+	public void setUserGiftId(Long userGiftId) {
+		this.userGiftId = userGiftId;
+	}
+
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
-	public int getGiftCardId() {
+	public Long getGiftCardId() {
 		return giftCardId;
 	}
 
-	public void setGiftCardId(int giftCardId) {
+	public void setGiftCardId(Long giftCardId) {
 		this.giftCardId = giftCardId;
 	}
 
@@ -118,11 +126,12 @@ public class User_Gift_details {
 		this.scheduledelivary = scheduledelivary;
 	}
 
-	public int getPersonalizeId() {
+	public Long getPersonalizeId() {
 		return personalizeId;
 	}
 
-	public void setPersonalizeId(int personalizeId) {
+	public void setPersonalizeId(Long personalizeId) {
 		this.personalizeId = personalizeId;
 	}
+
 }

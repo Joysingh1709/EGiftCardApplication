@@ -12,12 +12,33 @@ public class Personalize {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int personalizeId;
+	private Long personalizeId;
 
 	enum personalizeType {
 		birthday, Teacher, Wedding, Congratulations, Thankyou, WellDone, Love, Anniversary, MissYou
 	};
 
 	private String image;
+
+	public Personalize(String image) {
+		super();
+		this.image = image;
+	}
+
+	public Long getPersonalizeId() {
+		return personalizeId;
+	}
+
+	public void setPersonalizeId(Long personalizeId) {
+		this.personalizeId = personalizeId;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 }
