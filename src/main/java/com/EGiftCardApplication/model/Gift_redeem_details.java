@@ -14,13 +14,28 @@ public class Gift_redeem_details {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int gift_redeem_id;
+	private Long gift_redeem_id;
 
 	private boolean redeemStatus;
 	private Date giftRedeemDate;
 	private float giftRedeemAmount;
 	private float balance;
-	private int userGiftId;
+	private Long userGiftId;
+
+	@Override
+	public String toString() {
+		return "Gift_redeem_details [gift_redeem_id=" + gift_redeem_id + ", redeemStatus=" + redeemStatus
+				+ ", giftRedeemDate=" + giftRedeemDate + ", giftRedeemAmount=" + giftRedeemAmount + ", balance="
+				+ balance + ", userGiftId=" + userGiftId + "]";
+	}
+
+	public Long getGift_redeem_id() {
+		return gift_redeem_id;
+	}
+
+	public void setGift_redeem_id(Long gift_redeem_id) {
+		this.gift_redeem_id = gift_redeem_id;
+	}
 
 	public boolean isRedeemStatus() {
 		return redeemStatus;
@@ -54,19 +69,12 @@ public class Gift_redeem_details {
 		this.balance = balance;
 	}
 
-	public int getUserGiftId() {
+	public Long getUserGiftId() {
 		return userGiftId;
 	}
 
-	public void setUserGiftId(int userGiftId) {
+	public void setUserGiftId(Long userGiftId) {
 		this.userGiftId = userGiftId;
-	}
-
-	@Override
-	public String toString() {
-		return "Gift_redeem_details [gift_redeem_id=" + gift_redeem_id + ", redeemStatus=" + redeemStatus
-				+ ", giftRedeemDate=" + giftRedeemDate + ", giftRedeemAmount=" + giftRedeemAmount + ", balance="
-				+ balance + ", userGiftId=" + userGiftId + "]";
 	}
 
 }

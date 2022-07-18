@@ -14,7 +14,7 @@ public class Payment_Details {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int payment_id;
+	private Long payment_id;
 
 	@Override
 	public String toString() {
@@ -29,7 +29,15 @@ public class Payment_Details {
 	private String cardNumber;
 	private Date cardexpiry;
 	private String cvv;
-	private int userGiftId;
+	private Long userGiftId;
+
+	public Long getPayment_id() {
+		return payment_id;
+	}
+
+	public void setPayment_id(Long payment_id) {
+		this.payment_id = payment_id;
+	}
 
 	public String getPayment_date() {
 		return payment_date;
@@ -79,11 +87,11 @@ public class Payment_Details {
 		this.cvv = cvv;
 	}
 
-	public int getUserGiftId() {
+	public Long getUserGiftId() {
 		return userGiftId;
 	}
 
-	public void setUserGiftId(int userGiftId) {
+	public void setUserGiftId(Long userGiftId) {
 		this.userGiftId = userGiftId;
 	}
 
