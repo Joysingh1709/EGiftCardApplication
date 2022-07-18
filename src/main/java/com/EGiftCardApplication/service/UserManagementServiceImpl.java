@@ -28,13 +28,13 @@ public class UserManagementServiceImpl implements UserManagementService {
 			return new ArrayList<User>();
 		}
 	}
-
+	
 	@Override
-	public User getUserById(int userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public User getUserByEmail(String email) {
+		User user = userRepository.getUserByEmail(email);
+        return user;
 	}
-
+	
 	@Override
 	public User RegisterUser(User user) {
 		return userRepository.save(user);
@@ -64,5 +64,7 @@ public class UserManagementServiceImpl implements UserManagementService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

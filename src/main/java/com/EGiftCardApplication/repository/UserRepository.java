@@ -14,4 +14,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 			+ " and(:lastName is null or u.lastName = :lastName)")
 	List<User> getUserByfirstLast(@Param("firstName") String firstName, @Param("lastName") String lastName);
 
+	@Query("select u from User where (:email is null or u.email = :email)")
+	 
+
+	User getUserByEmail(@Param ("email")String email);
 }
