@@ -1,20 +1,34 @@
 package com.EGiftCardApplication.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.IContext;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import com.EGiftCardApplication.model.Gift_recd_details;
 import com.EGiftCardApplication.model.Gift_redeem_details;
+import com.EGiftCardApplication.util.NotificationUtils;
 
 @Service
 public class NotificationServiceImpl implements NotificationService {
 
 	@Autowired
+	private SpringTemplateEngine templateEngine;
+
+	@Autowired
 	private JavaMailSender emailSender;
+
+	@Autowired
+	private NotificationUtils notifUtil;
 
 	@Override
 	public List<Gift_recd_details> getAllGift_recd_details() {
@@ -41,13 +55,24 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
-	public String sendDemoNotif() {
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("hgacc262@gmail.com");
-		message.setTo("joy70013@gmail.com");
-		message.setSubject("E Gift Card App");
-		message.setText("This is a System generated mail.\nPlease do not reply back..!");
-		emailSender.send(message);
+	public String sendDemoNotif() throws MessagingException, UnsupportedEncodingException {
+		return null;
+	}
+
+	@Override
+	public String sendOnRegisterMail(String email, String firstname, String lastName)
+			throws UnsupportedEncodingException, MessagingException {
+		String html = notifUtil.simpleMailTemplate(email, firstname, lastName);
+		// SimpleMailMessage message = new SimpleMailMessage();
+
+		MimeMessage helper = emailSender.createMimeMessage();
+		MimeMessageHelper msg = new MimeMessageHelper(helper);
+
+		msg.setFrom("hgacc262@gmail.com", "E-GiftCard");
+		msg.setTo("avnishmamta060606@gmail.com");
+		msg.setSubject("E Gift Card App");
+		msg.setText(html, true);
+		emailSender.send(helper);
 		return "Email Sent..!";
 	}
 

@@ -12,7 +12,7 @@ public class Gift_Card {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int giftCardId;
+	private Long giftCardId;
 
 	private String giftCardName;
 	private String brandList;
@@ -21,6 +21,21 @@ public class Gift_Card {
 	private float minAmount = 100;
 	private float maxamount = 10000;
 	private String aboutGiftCard;
+
+	@Override
+	public String toString() {
+		return "Gift_Card [giftCardId=" + giftCardId + ", giftCardName=" + giftCardName + ", brandList=" + brandList
+				+ ", redemptiondetails=" + redemptiondetails + ", minAmount=" + minAmount + ", maxamount=" + maxamount
+				+ ", aboutGiftCard=" + aboutGiftCard + "]";
+	}
+
+	public Long getGiftCardId() {
+		return giftCardId;
+	}
+
+	public void setGiftCardId(Long giftCardId) {
+		this.giftCardId = giftCardId;
+	}
 
 	public String getGiftCardName() {
 		return giftCardName;
@@ -68,13 +83,6 @@ public class Gift_Card {
 
 	public void setAboutGiftCard(String aboutGiftCard) {
 		this.aboutGiftCard = aboutGiftCard;
-	}
-
-	@Override
-	public String toString() {
-		return "Gift_Card [giftCardId=" + giftCardId + ", giftCardName=" + giftCardName + ", brandList=" + brandList
-				+ ", redemptiondetails=" + redemptiondetails + ", minAmount=" + minAmount + ", maxamount=" + maxamount
-				+ ", aboutGiftCard=" + aboutGiftCard + "]";
 	}
 
 }

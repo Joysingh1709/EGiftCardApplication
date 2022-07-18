@@ -12,7 +12,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userId;
+	private Long userId;
 
 	@Override
 	public String toString() {
@@ -23,6 +23,17 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String mobile;
+	private String password;
+	private String address;
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -71,9 +82,5 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-	private String mobile;
-	private String password;
-	private String address;
 
 }

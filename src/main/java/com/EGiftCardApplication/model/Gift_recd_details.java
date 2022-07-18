@@ -14,11 +14,25 @@ public class Gift_recd_details {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int SerialNumber;
+	private Long SerialNumber;
 
 	private Date giftCardReceivedDate;
-	private int userId;
-	private int userGiftId;
+	private Long userId;
+	private Long userGiftId;
+
+	@Override
+	public String toString() {
+		return "Gift_recd_details [SerialNumber=" + SerialNumber + ", giftCardReceivedDate=" + giftCardReceivedDate
+				+ ", userId=" + userId + ", userGiftId=" + userGiftId + "]";
+	}
+
+	public Long getSerialNumber() {
+		return SerialNumber;
+	}
+
+	public void setSerialNumber(Long serialNumber) {
+		SerialNumber = serialNumber;
+	}
 
 	public Date getGiftCardReceivedDate() {
 		return giftCardReceivedDate;
@@ -28,26 +42,20 @@ public class Gift_recd_details {
 		this.giftCardReceivedDate = giftCardReceivedDate;
 	}
 
-	public int getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
-	public int getUserGiftId() {
+	public Long getUserGiftId() {
 		return userGiftId;
 	}
 
-	public void setUserGiftId(int userGiftId) {
+	public void setUserGiftId(Long userGiftId) {
 		this.userGiftId = userGiftId;
-	}
-
-	@Override
-	public String toString() {
-		return "Gift_recd_details [SerialNumber=" + SerialNumber + ", giftCardReceivedDate=" + giftCardReceivedDate
-				+ ", userId=" + userId + ", userGiftId=" + userGiftId + "]";
 	}
 
 }

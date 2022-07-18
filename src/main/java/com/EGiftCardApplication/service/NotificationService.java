@@ -1,6 +1,9 @@
 package com.EGiftCardApplication.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import javax.mail.MessagingException;
 
 import com.EGiftCardApplication.model.Gift_recd_details;
 import com.EGiftCardApplication.model.Gift_redeem_details;
@@ -15,6 +18,9 @@ public interface NotificationService {
 
 	Gift_recd_details sendGift_recd_detailsNotification(Gift_recd_details gift_recd_details);
 
-	String sendDemoNotif();
+	String sendDemoNotif() throws MessagingException, UnsupportedEncodingException;
+
+	String sendOnRegisterMail(String email, String firstname, String lastName)
+			throws UnsupportedEncodingException, MessagingException;
 
 }
