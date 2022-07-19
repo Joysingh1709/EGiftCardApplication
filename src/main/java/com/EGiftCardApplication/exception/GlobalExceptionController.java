@@ -38,4 +38,13 @@ public class GlobalExceptionController {
 		return new ResponseEntity<>(res, gce.getStatus());
 	}
 
+	@ExceptionHandler(UserGiftDetailsCustomExceptions.class)
+	public ResponseEntity<Map<String, Object>> userGiftDetailsCustomExceptionsHandler(
+			UserGiftDetailsCustomExceptions ugd) {
+		Map<String, Object> res = new HashMap<>();
+		res.put(status, false);
+		res.put(message, ugd.getMessage());
+		return new ResponseEntity<>(res, ugd.getStatus());
+	}
+
 }
