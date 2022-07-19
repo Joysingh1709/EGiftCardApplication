@@ -38,6 +38,9 @@ public class Gift_redeem_details {
 		this.userGiftDetails = userGiftDetails;
 	}
 
+	public Gift_redeem_details() {
+	}
+
 	public Long getGift_redeem_id() {
 		return gift_redeem_id;
 	}
