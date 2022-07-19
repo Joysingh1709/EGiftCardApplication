@@ -1,4 +1,5 @@
 package com.EGiftCardApplication.controller;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class UserController {
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<Map<String, Object>> userLogin(@RequestBody User user)
+	public ResponseEntity<Map<String, Object>> userRegister(@RequestBody User user)
 			throws UserCustomExceptions, InvalidInputException {
 		CreateResponseEntity res = new CreateResponseEntity();
 		res.setStatus(true);
@@ -84,6 +85,16 @@ public class UserController {
 		res.setMessage("these are the search results..!.");
 		res.setData(userService.updateUserPassword(body.get("email").toString(), body.get("oldPassword").toString(),
 				body.get("newPassword").toString()));
+		res.setHttpStatus(HttpStatus.OK);
+		return res.getResponseEntity();
+	}
+
+	@PostMapping("/place-gift-order")
+	public ResponseEntity<Map<String, Object>> placeGiftOrder(@RequestBody Map<String, Object> body) {
+		CreateResponseEntity res = new CreateResponseEntity();
+		res.setStatus(true);
+		res.setMessage("these are the search results..!.");
+		res.setData(userService);
 		res.setHttpStatus(HttpStatus.OK);
 		return res.getResponseEntity();
 	}
