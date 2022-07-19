@@ -22,6 +22,17 @@ public class Gift_Card {
 	private float maxamount = 10000;
 	private String aboutGiftCard;
 
+	public Gift_Card(String giftCardName, String brandList, String redemptiondetails, String aboutGiftCard) {
+		super();
+		this.giftCardName = giftCardName;
+		this.brandList = brandList;
+		this.redemptiondetails = redemptiondetails;
+		this.aboutGiftCard = aboutGiftCard;
+	}
+
+	public Gift_Card() {
+	}
+
 	@Override
 	public String toString() {
 		return "Gift_Card [giftCardId=" + giftCardId + ", giftCardName=" + giftCardName + ", brandList=" + brandList

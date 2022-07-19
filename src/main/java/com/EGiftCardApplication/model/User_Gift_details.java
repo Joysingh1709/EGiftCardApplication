@@ -36,23 +36,29 @@ public class User_Gift_details {
 	private String RecipientsEmail;
 	private String delivaryType;
 	private LocalDate scheduledelivary;
-	private Long personalizeId;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "personalizeId")
+	private Personalize personalize;
 
 	public User_Gift_details(User user, Gift_Card giftCard, float giftCardAmount, Date giftCardIssueDate,
 			boolean reloadable, String recipientsName, String recipientsMobileNumber, String recipientsEmail,
-			String delivaryType, LocalDate scheduledelivary, Long personalizeId) {
+			String delivaryType, LocalDate scheduledelivary, Personalize personalize) {
 		super();
 		this.user = user;
 		this.giftCard = giftCard;
 		this.giftCardAmount = giftCardAmount;
 		this.giftCardIssueDate = giftCardIssueDate;
 		this.reloadable = reloadable;
-		RecipientsName = recipientsName;
-		RecipientsMobileNumber = recipientsMobileNumber;
-		RecipientsEmail = recipientsEmail;
+		this.RecipientsName = recipientsName;
+		this.RecipientsMobileNumber = recipientsMobileNumber;
+		this.RecipientsEmail = recipientsEmail;
 		this.delivaryType = delivaryType;
 		this.scheduledelivary = scheduledelivary;
-		this.personalizeId = personalizeId;
+		this.personalize = personalize;
+	}
+
+	public User_Gift_details() {
 	}
 
 	public Long getUserGiftId() {
@@ -143,12 +149,12 @@ public class User_Gift_details {
 		this.scheduledelivary = scheduledelivary;
 	}
 
-	public Long getPersonalizeId() {
-		return personalizeId;
+	public Personalize getPersonalize() {
+		return personalize;
 	}
 
-	public void setPersonalizeId(Long personalizeId) {
-		this.personalizeId = personalizeId;
+	public void setPersonalize(Personalize personalize) {
+		this.personalize = personalize;
 	}
 
 }

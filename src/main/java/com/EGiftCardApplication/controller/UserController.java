@@ -89,14 +89,4 @@ public class UserController {
 		return res.getResponseEntity();
 	}
 
-	@PostMapping("/place-gift-order")
-	public ResponseEntity<Map<String, Object>> placeGiftOrder(@RequestBody Map<String, Object> body) {
-		CreateResponseEntity res = new CreateResponseEntity();
-		res.setStatus(true);
-		res.setMessage("these are the search results..!.");
-		res.setData(userService);
-		res.setHttpStatus(HttpStatus.OK);
-		return res.getResponseEntity();
-	}
-
 }

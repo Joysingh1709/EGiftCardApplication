@@ -36,6 +36,9 @@ public class Gift_recd_details {
 		this.userGiftDetails = userGiftDetails;
 	}
 
+	public Gift_recd_details() {
+	}
+
 	public Long getSerialNumber() {
 		return SerialNumber;
 	}
