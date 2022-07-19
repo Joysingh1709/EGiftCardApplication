@@ -2,10 +2,13 @@ package com.EGiftCardApplication.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,20 +19,28 @@ public class Payment_Details {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long payment_id;
 
-	@Override
-	public String toString() {
-		return "Payment_Details [payment_id=" + payment_id + ", payment_date=" + payment_date + ", payment_amount="
-				+ payment_amount + ", Nameonthecard=" + Nameonthecard + ", cardNumber=" + cardNumber + ", cardexpiry="
-				+ cardexpiry + ", cvv=" + cvv + ", userGiftId=" + userGiftId + "]";
-	}
-
 	private String payment_date;
 	private float payment_amount;
 	private String Nameonthecard;
 	private String cardNumber;
 	private Date cardexpiry;
 	private String cvv;
-	private Long userGiftId;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "userGiftId")
+	private User_Gift_details userGiftDetails;
+
+	public Payment_Details(String payment_date, float payment_amount, String nameonthecard, String cardNumber,
+			Date cardexpiry, String cvv, User_Gift_details userGiftDetails) {
+		super();
+		this.payment_date = payment_date;
+		this.payment_amount = payment_amount;
+		Nameonthecard = nameonthecard;
+		this.cardNumber = cardNumber;
+		this.cardexpiry = cardexpiry;
+		this.cvv = cvv;
+		this.userGiftDetails = userGiftDetails;
+	}
 
 	public Long getPayment_id() {
 		return payment_id;
@@ -87,12 +98,12 @@ public class Payment_Details {
 		this.cvv = cvv;
 	}
 
-	public Long getUserGiftId() {
-		return userGiftId;
+	public User_Gift_details getUserGiftDetails() {
+		return userGiftDetails;
 	}
 
-	public void setUserGiftId(Long userGiftId) {
-		this.userGiftId = userGiftId;
+	public void setUserGiftDetails(User_Gift_details userGiftDetails) {
+		this.userGiftDetails = userGiftDetails;
 	}
 
 }

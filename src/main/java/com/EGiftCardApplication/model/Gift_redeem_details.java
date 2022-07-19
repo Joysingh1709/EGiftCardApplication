@@ -2,10 +2,13 @@ package com.EGiftCardApplication.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,13 +23,19 @@ public class Gift_redeem_details {
 	private Date giftRedeemDate;
 	private float giftRedeemAmount;
 	private float balance;
-	private Long userGiftId;
 
-	@Override
-	public String toString() {
-		return "Gift_redeem_details [gift_redeem_id=" + gift_redeem_id + ", redeemStatus=" + redeemStatus
-				+ ", giftRedeemDate=" + giftRedeemDate + ", giftRedeemAmount=" + giftRedeemAmount + ", balance="
-				+ balance + ", userGiftId=" + userGiftId + "]";
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "userGiftId")
+	private User_Gift_details userGiftDetails;
+
+	public Gift_redeem_details(boolean redeemStatus, Date giftRedeemDate, float giftRedeemAmount, float balance,
+			User_Gift_details userGiftDetails) {
+		super();
+		this.redeemStatus = redeemStatus;
+		this.giftRedeemDate = giftRedeemDate;
+		this.giftRedeemAmount = giftRedeemAmount;
+		this.balance = balance;
+		this.userGiftDetails = userGiftDetails;
 	}
 
 	public Long getGift_redeem_id() {
@@ -69,12 +78,12 @@ public class Gift_redeem_details {
 		this.balance = balance;
 	}
 
-	public Long getUserGiftId() {
-		return userGiftId;
+	public User_Gift_details getUserGiftDetails() {
+		return userGiftDetails;
 	}
 
-	public void setUserGiftId(Long userGiftId) {
-		this.userGiftId = userGiftId;
+	public void setUserGiftDetails(User_Gift_details userGiftDetails) {
+		this.userGiftDetails = userGiftDetails;
 	}
 
 }

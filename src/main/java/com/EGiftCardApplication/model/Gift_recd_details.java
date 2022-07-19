@@ -2,10 +2,13 @@ package com.EGiftCardApplication.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,13 +20,20 @@ public class Gift_recd_details {
 	private Long SerialNumber;
 
 	private Date giftCardReceivedDate;
-	private Long userId;
-	private Long userGiftId;
 
-	@Override
-	public String toString() {
-		return "Gift_recd_details [SerialNumber=" + SerialNumber + ", giftCardReceivedDate=" + giftCardReceivedDate
-				+ ", userId=" + userId + ", userGiftId=" + userGiftId + "]";
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "userId")
+	private User user;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "userGiftId")
+	private User_Gift_details userGiftDetails;
+
+	public Gift_recd_details(Date giftCardReceivedDate, User user, User_Gift_details userGiftDetails) {
+		super();
+		this.giftCardReceivedDate = giftCardReceivedDate;
+		this.user = user;
+		this.userGiftDetails = userGiftDetails;
 	}
 
 	public Long getSerialNumber() {
@@ -42,20 +52,20 @@ public class Gift_recd_details {
 		this.giftCardReceivedDate = giftCardReceivedDate;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public Long getUserGiftId() {
-		return userGiftId;
+	public User_Gift_details getUserGiftDetails() {
+		return userGiftDetails;
 	}
 
-	public void setUserGiftId(Long userGiftId) {
-		this.userGiftId = userGiftId;
+	public void setUserGiftDetails(User_Gift_details userGiftDetails) {
+		this.userGiftDetails = userGiftDetails;
 	}
 
 }

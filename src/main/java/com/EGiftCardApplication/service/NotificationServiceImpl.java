@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -19,6 +20,7 @@ import com.EGiftCardApplication.model.Gift_redeem_details;
 import com.EGiftCardApplication.util.NotificationUtils;
 
 @Service
+@Transactional
 public class NotificationServiceImpl implements NotificationService {
 
 	@Autowired

@@ -3,10 +3,13 @@ package com.EGiftCardApplication.model;
 import java.time.LocalDate;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,8 +20,14 @@ public class User_Gift_details {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userGiftId;
 
-	private Long userId;
-	private Long giftCardId;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "userId")
+	private User user;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "giftCardId")
+	private Gift_Card giftCard;
+
 	private float giftCardAmount;
 	private Date giftCardIssueDate;
 	private boolean reloadable;
@@ -29,13 +38,21 @@ public class User_Gift_details {
 	private LocalDate scheduledelivary;
 	private Long personalizeId;
 
-	@Override
-	public String toString() {
-		return "User_Gift_details [userGiftId=" + userGiftId + ", userId=" + userId + ", giftCardId=" + giftCardId
-				+ ", giftCardAmount=" + giftCardAmount + ", giftCardIssueDate=" + giftCardIssueDate + ", reloadable="
-				+ reloadable + ", RecipientsName=" + RecipientsName + ", RecipientsMobileNumber="
-				+ RecipientsMobileNumber + ", RecipientsEmail=" + RecipientsEmail + ", delivaryType=" + delivaryType
-				+ ", scheduledelivary=" + scheduledelivary + ", personalizeId=" + personalizeId + "]";
+	public User_Gift_details(User user, Gift_Card giftCard, float giftCardAmount, Date giftCardIssueDate,
+			boolean reloadable, String recipientsName, String recipientsMobileNumber, String recipientsEmail,
+			String delivaryType, LocalDate scheduledelivary, Long personalizeId) {
+		super();
+		this.user = user;
+		this.giftCard = giftCard;
+		this.giftCardAmount = giftCardAmount;
+		this.giftCardIssueDate = giftCardIssueDate;
+		this.reloadable = reloadable;
+		RecipientsName = recipientsName;
+		RecipientsMobileNumber = recipientsMobileNumber;
+		RecipientsEmail = recipientsEmail;
+		this.delivaryType = delivaryType;
+		this.scheduledelivary = scheduledelivary;
+		this.personalizeId = personalizeId;
 	}
 
 	public Long getUserGiftId() {
@@ -46,20 +63,20 @@ public class User_Gift_details {
 		this.userGiftId = userGiftId;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public Long getGiftCardId() {
-		return giftCardId;
+	public Gift_Card getGiftCard() {
+		return giftCard;
 	}
 
-	public void setGiftCardId(Long giftCardId) {
-		this.giftCardId = giftCardId;
+	public void setGiftCard(Gift_Card giftCard) {
+		this.giftCard = giftCard;
 	}
 
 	public float getGiftCardAmount() {

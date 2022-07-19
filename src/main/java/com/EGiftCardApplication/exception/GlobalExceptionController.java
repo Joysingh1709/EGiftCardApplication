@@ -30,4 +30,12 @@ public class GlobalExceptionController {
 		return new ResponseEntity<>(res, iie.getStatus());
 	}
 
+	@ExceptionHandler(GiftCardCustomExceptions.class)
+	public ResponseEntity<Map<String, Object>> giftCardCustomExceptionHandler(GiftCardCustomExceptions gce) {
+		Map<String, Object> res = new HashMap<>();
+		res.put(status, false);
+		res.put(message, gce.getMessage());
+		return new ResponseEntity<>(res, gce.getStatus());
+	}
+
 }
