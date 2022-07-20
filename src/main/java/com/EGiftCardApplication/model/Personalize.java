@@ -25,6 +25,9 @@ public class Personalize {
 		this.image = image;
 	}
 
+	public Personalize() {
+	}
+
 	public Long getPersonalizeId() {
 		return personalizeId;
 	}
