@@ -10,4 +10,8 @@ public interface GiftRecdDetailsService {
 
 	public Gift_recd_details addGift_recd_details(Gift_recd_details giftRecdDetails);
 
+	public Gift_recd_details getGift_recd_detailsById(Long serialNumber);
+
+	public Gift_recd_details updateGift_recd_details(Gift_recd_details giftRecdDetails);
+
 }
