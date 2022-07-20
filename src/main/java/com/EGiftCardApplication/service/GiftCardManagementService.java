@@ -11,7 +11,7 @@ import com.EGiftCardApplication.model.Gift_Card;
 
 public interface GiftCardManagementService {
 	List<Gift_Card> getAllGift_Cards();
-
+	
 	Gift_Card getGift_CardById(Long GiftCardId) throws GiftCardCustomExceptions;
 
 	Gift_Card RegisterGift_Card(Map<String, Object> giftCardDetails)

@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.EGiftCardApplication.exception.UserCustomExceptions;
 import com.EGiftCardApplication.exception.UserGiftDetailsCustomExceptions;
+import com.EGiftCardApplication.model.User;
 import com.EGiftCardApplication.model.User_Gift_details;
 import com.EGiftCardApplication.repository.UserGiftDetailsAccountManagementRepository;
 
@@ -19,6 +21,9 @@ public class User_Gift_detailsAccountManagementServiceImpl implements User_Gift_
 
 	@Autowired
 	private UserGiftDetailsAccountManagementRepository userGiftDetailsRepo;
+
+	@Autowired
+	private UserManagementService userRepo;
 
 	@Override
 	public List<User_Gift_details> getAllUser_Gift_details() {
@@ -65,6 +70,12 @@ public class User_Gift_detailsAccountManagementServiceImpl implements User_Gift_
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return "User gift card details deleted successfully..!";
+	}
+
+	@Override
+	public List<User_Gift_details> getUserGiftOrderHistory(Long userId) throws UserCustomExceptions {
+		User u = userRepo.getUserById(userId);
+		return userGiftDetailsRepo.getUserGiftOrderHistory(u);
 	}
 
 }

@@ -16,6 +16,7 @@ import com.EGiftCardApplication.exception.InvalidInputException;
 import com.EGiftCardApplication.exception.UserCustomExceptions;
 import com.EGiftCardApplication.model.User;
 import com.EGiftCardApplication.service.UserManagementService;
+import com.EGiftCardApplication.service.User_Gift_detailsAccountManagementService;
 import com.EGiftCardApplication.util.CreateResponseEntity;
 
 @RestController()
@@ -24,6 +25,9 @@ public class UserController {
 
 	@Autowired
 	private UserManagementService userService;
+
+	@Autowired
+	private User_Gift_detailsAccountManagementService userGiftDetailsService;
 
 	@GetMapping()
 	public ResponseEntity<Map<String, Object>> getAllUsers() {
@@ -82,9 +86,19 @@ public class UserController {
 			throws UserCustomExceptions, InvalidInputException {
 		CreateResponseEntity res = new CreateResponseEntity();
 		res.setStatus(true);
-		res.setMessage("these are the search results..!.");
+		res.setMessage("Password changed successfully..!.");
 		res.setData(userService.updateUserPassword(body.get("email").toString(), body.get("oldPassword").toString(),
 				body.get("newPassword").toString()));
+		res.setHttpStatus(HttpStatus.OK);
+		return res.getResponseEntity();
+	}
+
+	@GetMapping("/{userId}/view-order-history")
+	public ResponseEntity<Map<String, Object>> viewOrderHistory(@PathVariable Long userId) throws UserCustomExceptions {
+		CreateResponseEntity res = new CreateResponseEntity();
+		res.setStatus(true);
+		res.setMessage("User gift order history fetched successfully..!.");
+		res.setData(userGiftDetailsService.getUserGiftOrderHistory(userId));
 		res.setHttpStatus(HttpStatus.OK);
 		return res.getResponseEntity();
 	}
