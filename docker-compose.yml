@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  e-gcard:
+    image: e-gcard:EGiftCardApplication-0.0.1-SNAPSHOT
+    restart: always
+    depends_on:
+      - mysqldb
+    build: .
+    ports:
+       - 8080:8080
+    command: sh -c './wait-for mysqldb:3306 -- npm start'
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASS: root
+
+  mysqldb:
+    container_name: mysqldb
+    restart: always    
+    image: "mysql:8.0"
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: egcdb
