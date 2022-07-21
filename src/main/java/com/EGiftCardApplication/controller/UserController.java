@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.EGiftCardApplication.exception.InvalidInputException;
 import com.EGiftCardApplication.exception.UserCustomExceptions;
+import com.EGiftCardApplication.model.LoginCred;
 import com.EGiftCardApplication.model.User;
 import com.EGiftCardApplication.service.UserManagementService;
 import com.EGiftCardApplication.service.User_Gift_detailsAccountManagementService;
@@ -51,12 +52,12 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<Map<String, Object>> userLogin(@RequestBody Map<String, Object> body)
+	public ResponseEntity<Map<String, Object>> userLogin(@RequestBody LoginCred body)
 			throws UserCustomExceptions, InvalidInputException {
 		CreateResponseEntity res = new CreateResponseEntity();
 		res.setStatus(true);
 		res.setMessage("Login successfull.");
-		res.setData(userService.getUserByEmailPass(body.get("email").toString(), body.get("password").toString()));
+		res.setData(userService.getUserByEmailPass(body.getEmail(), body.getPassword()));
 		res.setHttpStatus(HttpStatus.OK);
 		return res.getResponseEntity();
 	}
