@@ -8,7 +8,6 @@ services:
     build: .
     ports:
        - 8080:8080
-    command: sh -c './wait-for mysqldb:3306 -- npm start'
     environment:
       MYSQL_HOST: mysqldb
       MYSQL_PORT: 3306
