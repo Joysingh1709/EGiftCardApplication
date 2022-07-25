@@ -1,6 +1,9 @@
 package com.EGiftCardApplication.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import javax.mail.MessagingException;
 
 import com.EGiftCardApplication.exception.InvalidInputException;
 import com.EGiftCardApplication.exception.UserCustomExceptions;
@@ -13,17 +16,18 @@ public interface UserManagementService {
 	User getUserByEmailPass(String email, String password) throws UserCustomExceptions, InvalidInputException;
 
 	User updateUserPassword(String email, String oldPassword, String newPassword)
-			throws UserCustomExceptions, InvalidInputException;
+			throws UserCustomExceptions, InvalidInputException, UnsupportedEncodingException, MessagingException;
 
 	List<User> searchUsers(String searchText);
 
 	User getUserById(Long userId) throws UserCustomExceptions;
 
-	User RegisterUser(User user) throws UserCustomExceptions, InvalidInputException;
+	User RegisterUser(User user)
+			throws UserCustomExceptions, InvalidInputException, UnsupportedEncodingException, MessagingException;
 
-	User UpdateUser(User user) throws UserCustomExceptions;
+	User UpdateUser(User user) throws UserCustomExceptions, UnsupportedEncodingException, MessagingException;
 
-	User UpdateUserById(Long userId);
+	User getUserByEmail(String email) throws InvalidInputException, UserCustomExceptions;
 
 	String deleteUser(User user) throws UserCustomExceptions;
 

@@ -1,5 +1,6 @@
 package com.EGiftCardApplication.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class UserManagementServiceImpl implements UserManagementService {
 	@Autowired
 	private Validations validator;
 
+	@Autowired
+	private NotificationService notifService;
+
 	@Override
 	public List<User> getAllUsers() {
 		return userRepo.findAll();
@@ -44,7 +49,8 @@ public class UserManagementServiceImpl implements UserManagementService {
 	}
 
 	@Override
-	public User RegisterUser(User user) throws UserCustomExceptions, InvalidInputException {
+	public User RegisterUser(User user)
+			throws UserCustomExceptions, InvalidInputException, UnsupportedEncodingException, MessagingException {
 		if (!validator.isEmailValid(user.getEmail())) {
 			throw new InvalidInputException("Invalid email. Try again..!", HttpStatus.UNAUTHORIZED);
 		}
@@ -53,24 +59,32 @@ public class UserManagementServiceImpl implements UserManagementService {
 		}
 		User usr = userRepo.save(user);
 		if (usr != null) {
+			notifService.sendDemoNotif(usr.getEmail(), usr.getFirstName(), usr.getLastName(), "register");
 			return usr;
 		}
 		throw new UserCustomExceptions("Cannot Register the user. Try again..!", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@Override
-	public User UpdateUser(User user) throws UserCustomExceptions {
+	public User UpdateUser(User user) throws UserCustomExceptions, UnsupportedEncodingException, MessagingException {
 		User usr = userRepo.save(user);
 		if (usr != null) {
+			notifService.sendDemoNotif(usr.getEmail(), usr.getFirstName(), usr.getLastName(), "update");
 			return usr;
 		}
 		throw new UserCustomExceptions("Cannot update the user. Try again..!", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@Override
-	public User UpdateUserById(Long userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public User getUserByEmail(String email) throws InvalidInputException, UserCustomExceptions {
+		if (!validator.isEmailValid(email)) {
+			throw new InvalidInputException("Invalid email. Try again..!", HttpStatus.UNAUTHORIZED);
+		}
+		User usr = userRepo.getUserByEmail(email);
+		if (usr != null) {
+			return usr;
+		}
+		throw new UserCustomExceptions("Invalid email. Try again..!", HttpStatus.UNAUTHORIZED);
 	}
 
 	public String deleteUser(User user) throws UserCustomExceptions {
@@ -108,7 +122,7 @@ public class UserManagementServiceImpl implements UserManagementService {
 
 	@Override
 	public User updateUserPassword(String email, String oldPassword, String newPassword)
-			throws UserCustomExceptions, InvalidInputException {
+			throws UserCustomExceptions, InvalidInputException, UnsupportedEncodingException, MessagingException {
 		User usr = userRepo.getUserWithOldPass(email, oldPassword);
 		if (usr != null) {
 			if (!validator.isPasswordValid(newPassword)) {
@@ -119,6 +133,8 @@ public class UserManagementServiceImpl implements UserManagementService {
 						HttpStatus.UNAUTHORIZED);
 			}
 			usr.setPassword(newPassword);
+			notifService.sendDemoNotif(usr.getEmail(), usr.getFirstName(), usr.getLastName(), "update");
+
 			return userRepo.save(usr);
 		}
 		throw new UserCustomExceptions("Old password is incorrect..!", HttpStatus.UNAUTHORIZED);
