@@ -1,7 +1,10 @@
 package com.EGiftCardApplication.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.Map;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.EGiftCardApplication.exception.GiftCardCustomExceptions;
+import com.EGiftCardApplication.exception.InvalidInputException;
 import com.EGiftCardApplication.exception.UserCustomExceptions;
 import com.EGiftCardApplication.exception.UserGiftDetailsCustomExceptions;
 import com.EGiftCardApplication.service.GiftCardManagementService;
@@ -37,7 +41,8 @@ public class GiftCardController {
 
 	@PostMapping("/place-gift-order")
 	public ResponseEntity<Map<String, Object>> placeGiftOrder(@RequestBody Map<String, Object> body)
-			throws GiftCardCustomExceptions, UserCustomExceptions, UserGiftDetailsCustomExceptions, ParseException {
+			throws GiftCardCustomExceptions, UserCustomExceptions, UserGiftDetailsCustomExceptions, ParseException,
+			UnsupportedEncodingException, MessagingException, InvalidInputException {
 		CreateResponseEntity res = new CreateResponseEntity();
 		res.setStatus(true);
 		res.setMessage("Gift order placed successfully..!.");

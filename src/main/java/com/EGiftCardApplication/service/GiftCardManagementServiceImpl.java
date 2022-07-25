@@ -1,5 +1,6 @@
 package com.EGiftCardApplication.service;
 
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.EGiftCardApplication.exception.GiftCardCustomExceptions;
+import com.EGiftCardApplication.exception.InvalidInputException;
 import com.EGiftCardApplication.exception.UserCustomExceptions;
 import com.EGiftCardApplication.exception.UserGiftDetailsCustomExceptions;
 import com.EGiftCardApplication.model.Gift_Card;
@@ -40,6 +43,9 @@ public class GiftCardManagementServiceImpl implements GiftCardManagementService 
 	@Autowired
 	private GiftRecdDetailsService giftRecdService;
 
+	@Autowired
+	private NotificationService notifService;
+
 	@Override
 	public List<Gift_Card> getAllGift_Cards() {
 		return giftCardRepo.findAll();
@@ -56,7 +62,8 @@ public class GiftCardManagementServiceImpl implements GiftCardManagementService 
 
 	@Override
 	public Gift_Card RegisterGift_Card(Map<String, Object> giftCard)
-			throws GiftCardCustomExceptions, UserCustomExceptions, UserGiftDetailsCustomExceptions, ParseException {
+			throws GiftCardCustomExceptions, UserCustomExceptions, UserGiftDetailsCustomExceptions, ParseException,
+			UnsupportedEncodingException, MessagingException, InvalidInputException {
 
 		Gift_Card gc = giftCardRepo.save(new Gift_Card(giftCard.get("giftCardName").toString(),
 				giftCard.get("brandList").toString(),
@@ -70,6 +77,8 @@ public class GiftCardManagementServiceImpl implements GiftCardManagementService 
 			Personalize pz = new Personalize("");
 			// user who is buying the gift card
 			User u = userService.getUserById(Long.valueOf(giftCard.get("userId").toString()));
+
+			User u_reciever = userService.getUserByEmail(String.valueOf(giftCard.get("RecipientsEmail").toString()));
 
 			User_Gift_details userGiftDet = new User_Gift_details();
 			userGiftDet.setUser(u);
@@ -98,6 +107,9 @@ public class GiftCardManagementServiceImpl implements GiftCardManagementService 
 
 				Gift_recd_details newgrd = giftRecdService.addGift_recd_details(giftRecd);
 				if (newgrd != null) {
+					notifService.sendDemoNotif(u.getEmail(), u.getFirstName(), u.getLastName(), "purchase");
+					notifService.sendDemoNotif(u_reciever.getEmail(), u_reciever.getFirstName(),
+							u_reciever.getLastName(), "recieve");
 					return gc;
 				}
 				throw new GiftCardCustomExceptions("Error Adding gift card record details. Try again..!",

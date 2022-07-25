@@ -1,6 +1,9 @@
 package com.EGiftCardApplication.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,7 +45,7 @@ public class UserController {
 
 	@PostMapping("/register")
 	public ResponseEntity<Map<String, Object>> userRegister(@RequestBody User user)
-			throws UserCustomExceptions, InvalidInputException {
+			throws UserCustomExceptions, InvalidInputException, UnsupportedEncodingException, MessagingException {
 		CreateResponseEntity res = new CreateResponseEntity();
 		res.setStatus(true);
 		res.setMessage("user registered successfully.");
@@ -84,7 +87,7 @@ public class UserController {
 
 	@PostMapping("/change-password")
 	public ResponseEntity<Map<String, Object>> changePassword(@RequestBody Map<String, Object> body)
-			throws UserCustomExceptions, InvalidInputException {
+			throws UserCustomExceptions, InvalidInputException, UnsupportedEncodingException, MessagingException {
 		CreateResponseEntity res = new CreateResponseEntity();
 		res.setStatus(true);
 		res.setMessage("Password changed successfully..!.");
